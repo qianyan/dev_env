@@ -1,0 +1,31 @@
+---
+- name: install sqlite3
+  apt: name=sqlite3 state=present
+
+- name: install nvm
+  shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.26.0/install.sh | bash
+  sudo: no
+
+- name: install & use node 0.12.7
+  shell: source ~/.nvm/nvm.sh && \
+      nvm install 0.12.7 && nvm use 0.12.7 && \
+      nvm alias default 0.12.7 
+  args:
+   executable: /bin/bash
+  sudo: no
+
+- name: import public key
+  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+- name: install rvm
+  shell: curl -sSL https://get.rvm.io | bash -s stable 
+
+- name: install & use ruby2.1
+  shell: . /etc/profile && rvm install 2.1 && rvm use 2.1
+  args:
+    executable: /bin/bash
+
+- name: install rails
+  shell: . /etc/profile && gem sources --remove https://rubygems.org/ && gem sources -a https://ruby.taobao.org/ && gem install rails
+  args:
+    executable: /bin/bash

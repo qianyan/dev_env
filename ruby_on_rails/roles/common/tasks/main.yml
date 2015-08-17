@@ -1,0 +1,12 @@
+---
+- name: change sourcelist
+  copy: src=sources.list.vivid dest=/etc/apt/sources.list mode=0755
+
+- name: update apt cache
+  apt: update_cache=yes
+
+- name: install curl
+  apt: name=curl state=present
+
+- name: uninstall ruby
+  apt: name=ruby state=absent

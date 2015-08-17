@@ -1,0 +1,14 @@
+---
+# This playbook setup on ruby on rails developement environment
+
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+#  pre_tasks:
+#    - shell: whoami
+#      register: result
+#    - debug: var=result
+
+  roles:
+    - common
+    - rails
